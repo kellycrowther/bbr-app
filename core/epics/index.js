@@ -1,11 +1,17 @@
 import 'rxjs';
 import {combineEpics} from 'redux-observable';
 import {ajax} from 'rxjs/ajax';
-import {of} from 'rxjs';
+import {of, from} from 'rxjs';
 import {mergeMap, takeUntil, map, retry, catchError} from 'rxjs/operators';
 import {ofType} from 'redux-observable';
 import {RacesActions, getRaceByIdFailure, getRaceByIdSuccess} from '../actions';
 import config from '../../config';
+import {
+  RecActivitiesActions,
+  getActivitiesSuccess,
+  getActivitiesFailure,
+} from '../actions/rec-activities';
+import firebase from 'react-native-firebase';
 
 const endpoint = config.API_ENDPOINT;
 
@@ -27,4 +33,30 @@ export const getRace = actions$ => {
   );
 };
 
-export default combineEpics(getRace);
+export const getRecActivities = actions$ => {
+  return actions$.pipe(
+    ofType(RecActivitiesActions.GET_ACTIVITIES),
+    mergeMap(action => {
+      const request = from(
+        firebase
+          .firestore()
+          .collection('recActivities')
+          .get(),
+      );
+      return request.pipe(
+        map(res => {
+          console.info('RESPONSE: ', res);
+          // ids = res.docs.map(doc => doc.id);
+          documents = res.docs.map(doc => doc.data());
+          console.info('DOCUMENTS: ', documents);
+          return getActivitiesSuccess(documents);
+        }),
+        takeUntil(actions$.ofType(RecActivitiesActions.GET_ACTIVITIES_SUCCESS)),
+        retry(2),
+        catchError(error => of(getActivitiesFailure())),
+      );
+    }),
+  );
+};
+
+export default combineEpics(getRace, getRecActivities);

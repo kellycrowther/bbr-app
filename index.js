@@ -21,7 +21,6 @@ const composeEnhancers = composeWithDevTools({
   realtime: true,
   hostname: 'localhost',
   port: 8000,
-  suppressConnectErrors: false,
 });
 
 const store = createStore(

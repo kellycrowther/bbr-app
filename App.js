@@ -12,8 +12,9 @@ import firebase from 'react-native-firebase';
 
 import {getRaceById} from './core/actions/index.js';
 import {connect} from 'react-redux';
+import {getActivities} from './core/actions/rec-activities';
 
-const App = ({getRaceById, currentRace}) => {
+const App = ({getRaceById, currentRace, getRecActivities}) => {
   // async componentDidMount() {
   //   // TODO: You: Do firebase things
   //   // const { user } = await firebase.auth().signInAnonymously();
@@ -23,6 +24,7 @@ const App = ({getRaceById, currentRace}) => {
 
   useEffect(() => {
     getRaceById('35e0b6c0-323b-11ea-b6f6-2b4523c9324d');
+    getRecActivities();
   }, []);
 
   useEffect(() => {
@@ -109,6 +111,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getRaceById: id => dispatch(getRaceById({id})),
+  getRecActivities: () => dispatch(getActivities()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
