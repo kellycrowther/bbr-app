@@ -77,5 +77,11 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for showing your current location at Black Butte Ranch and suggesting routes.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for showing your current location at Black Butte Ranch and suggesting routes.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>$(PRODUCT_NAME) needs Location access for showing your current location at Black Butte Ranch and suggesting routes!</string>
 </dict>
 </plist>

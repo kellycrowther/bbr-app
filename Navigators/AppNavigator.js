@@ -2,6 +2,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import Home from '../containers/Home';
 import RecActivitiesList from '../containers/RecActivitiesList';
+import LocationMap from '../containers/LocationMap';
 
 /**
  * The root screen contains the application's navigation.
@@ -16,6 +17,12 @@ const AppNavigator = createStackNavigator({
     screen: RecActivitiesList,
     navigationOptions: ({navigation}) => ({
       title: 'Recreation Activities',
+    }),
+  },
+  LocationMap: {
+    screen: LocationMap,
+    navigationOptions: ({navigation}) => ({
+      title: 'Locations',
     }),
   },
 });

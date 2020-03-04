@@ -13,6 +13,11 @@ const Home = () => {
       id: 1,
     },
     {
+      name: 'Location Map',
+      navigation: 'LocationMap',
+      id: 4,
+    },
+    {
       name: 'Events',
       navigation: 'Events', // need to define route
       id: 2,
